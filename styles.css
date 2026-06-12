@@ -292,6 +292,10 @@ input{font-family:inherit}
 .search-box input::placeholder{color:var(--muted)}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:0 14px 12px}
 .chips::-webkit-scrollbar{display:none}
+/* área scrollable de la lista de movimientos (header+search+chips quedan fijos) */
+.txn-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
+.txn-scroll::-webkit-scrollbar{width:0}
+.txn-scroll>.pad-tight{padding:0 14px}
 .chip-f{flex:none;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-sm);color:var(--ink-2);transition:background .15s}
 .chip-f:hover{background:var(--surface-2)}
 .chip-f.active{background:linear-gradient(135deg,var(--purple),var(--purple-deep));border-color:transparent;color:#fff}

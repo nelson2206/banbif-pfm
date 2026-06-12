@@ -250,7 +250,7 @@
       </section>
 
       <!-- ============ TRANSACTIONS ============ -->
-      <section class="view view-scroll" data-view="transactions">
+      <section class="view" data-view="transactions">
         <header class="subhead">
           <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
           <h1>Movimientos</h1>
@@ -260,9 +260,11 @@
           <span class="search-box"><svg class="ic"><use href="#i-search"/></svg><input id="txnSearch" placeholder="Buscar comercio o categoría" /></span>
         </div>
         <div class="chips" id="txnChips"></div>
-        <div class="pad pad-tight">
-          <div id="txnList"></div>
-          <div class="end-space"></div>
+        <div class="txn-scroll">
+          <div class="pad-tight">
+            <div id="txnList"></div>
+            <div class="end-space"></div>
+          </div>
         </div>
       </section>
 

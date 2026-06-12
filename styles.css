@@ -70,7 +70,7 @@ input{font-family:inherit}
   display:flex;flex-direction:column;
 }
 .statusbar{height:50px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 8px;font-size:14px;font-weight:700;color:var(--ink);z-index:20;position:relative}
-.view-splash .statusbar,.view-splash~.statusbar{color:#fff}
+#screen.on-splash .statusbar{color:#fff}
 .sb-right{display:flex;align-items:center;gap:5px}
 .sb-net,.sb-wifi,.sb-bat{display:inline-block;background:currentColor;opacity:.9}
 .sb-net{width:17px;height:11px;-webkit-mask:linear-gradient(#000 0 0);border-radius:2px;clip-path:polygon(0 70%,18% 70%,18% 100%,0 100%,0 70%,30% 50%,30% 100%,30% 100%);background:none}

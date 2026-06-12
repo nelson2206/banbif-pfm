@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
-<meta name="theme-color" content="#20A6FF" />
+<meta name="theme-color" content="#0B0E16" />
 <meta name="description" content="BanBif PFM — Mockup demostrativo de gestor de finanzas personales. Datos ficticios." />
 <title>BanBif · Mis Finanzas (PFM)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%238B5CF6'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-size='17' font-weight='800' fill='white'%3EB%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -91,10 +92,9 @@
         <div class="splash-bg"></div>
         <div class="splash-inner">
           <div class="splash-brand">
-            <span class="logo-mark lg" aria-hidden="true"></span>
             <span class="splash-word">BanBif</span>
           </div>
-          <p class="splash-tag">Tu dinero, claro y bajo control.</p>
+          <p class="splash-tag">Tus finanzas, <span class="hl">claras</span><br />y en un solo lugar</p>
           <div class="splash-card">
             <div class="splash-avatar">VR</div>
             <div>
@@ -102,8 +102,8 @@
               <div class="splash-sub">Ingresa para ver tus finanzas</div>
             </div>
           </div>
-          <button class="btn btn-lime btn-block" data-go="home">Ingresar con Face ID</button>
-          <button class="btn btn-ghost-light btn-block" data-go="home">Usar clave</button>
+          <button class="btn btn-primary btn-block" data-go="home">Usar Face ID</button>
+          <button class="btn btn-ghost-light btn-block" data-go="home">Ingresar con clave digital</button>
           <div class="splash-foot">Demo · sin datos reales · v1.0</div>
         </div>
       </section>
@@ -124,6 +124,8 @@
         </header>
 
         <div class="pad">
+          <!-- ════ PILAR 1 ════ -->
+          <span class="overline">Tu panorama financiero en tiempo real</span>
           <!-- Net worth hero -->
           <div class="hero-card">
             <div class="hero-top">
@@ -131,9 +133,10 @@
               <button class="eyebtn" id="eyeToggle" aria-label="Mostrar/ocultar saldo"><svg class="ic"><use href="#i-eye"/></svg></button>
             </div>
             <div class="hero-amount" data-amount="48250.80">S/ 48,250.80</div>
+            <div class="hero-banks">BanBif + 2 bancos conectados · actualizado hace 5 min</div>
             <div class="hero-row">
               <span class="hero-pill up"><svg class="ic"><use href="#i-up"/></svg> +S/ 1,240 este mes</span>
-              <span class="hero-mini">Disponible S/ 12,180</span>
+              <span class="hero-mini">Disponible S/ 16,030</span>
             </div>
             <div class="hero-spark" id="heroSpark"></div>
           </div>
@@ -146,12 +149,15 @@
             <button class="quick-it" data-go="goals"><span class="qi-ic"><svg class="ic"><use href="#i-target"/></svg></span>Metas</button>
           </div>
 
-          <!-- Accounts carousel -->
+          <!-- Accounts carousel (BanBif + agregadas open banking) -->
           <div class="sec-head">
             <h2>Mis cuentas</h2>
             <button class="link" data-go="accounts">Ver todas <svg class="ic sm"><use href="#i-chev"/></svg></button>
           </div>
           <div class="cards-rail" id="accountsRail"></div>
+
+          <!-- ════ PILAR 2 ════ -->
+          <span class="overline">Entiende tus finanzas y toma mejores decisiones</span>
 
           <!-- Financial health -->
           <div class="health-card" data-go="health">
@@ -206,6 +212,15 @@
             </div>
           </div>
 
+          <!-- ════ PILAR 3 ════ -->
+          <span class="overline">Alcanza tus metas con recomendaciones para ti</span>
+          <div class="sec-head">
+            <h2>Tus metas</h2>
+            <button class="link" data-go="goals">Ver todas <svg class="ic sm"><use href="#i-chev"/></svg></button>
+          </div>
+          <div class="goals-mini" id="goalsMini"></div>
+          <div id="homeReco" style="margin-top:12px"></div>
+
           <div class="end-space"></div>
         </div>
       </section>
@@ -219,8 +234,8 @@
         </header>
         <div class="pad">
           <div class="net-strip">
-            <div><span>Activos</span><b class="pos">S/ 50,710</b></div>
-            <div><span>Deudas</span><b class="neg">S/ 2,459</b></div>
+            <div><span>Activos</span><b class="pos">S/ 52,101</b></div>
+            <div><span>Deudas</span><b class="neg">S/ 3,850</b></div>
             <div><span>Neto</span><b>S/ 48,251</b></div>
           </div>
           <div id="accountsList"></div>
@@ -328,6 +343,8 @@
           </div>
           <div class="roundup-stat">Este mes redondeaste <b>S/ 86.40</b> sin darte cuenta ✨</div>
           <div id="goalsList"></div>
+          <div class="sec-head"><h2>Recomendado para ti</h2></div>
+          <div id="recoList"></div>
           <div class="end-space"></div>
         </div>
       </section>
@@ -361,6 +378,26 @@
         </header>
         <div class="pad">
           <div id="notifList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ CONNECTIONS / CONSENTS ============ -->
+      <section class="view view-scroll" data-view="consents">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Bancos conectados</h1>
+          <button class="iconbtn" aria-label="Conectar banco"><svg class="ic"><use href="#i-plus"/></svg></button>
+        </header>
+        <div class="pad">
+          <p class="consent-intro">Administra las conexiones <b>open banking</b> con otros bancos y los consentimientos de uso de tus datos. Puedes revocarlos cuando quieras.</p>
+          <div id="connList"></div>
+          <div class="sec-head"><h2>Consentimientos</h2></div>
+          <div id="consentList"></div>
+          <div class="consent-note">
+            <svg class="ic"><use href="#i-shield"/></svg>
+            <span>Tus datos se usan únicamente para tu análisis financiero y recomendaciones. Nunca se comparten con terceros sin tu autorización.</span>
+          </div>
           <div class="end-space"></div>
         </div>
       </section>

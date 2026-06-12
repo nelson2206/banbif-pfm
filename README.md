@@ -5,10 +5,10 @@ Prototipo navegable de alta fidelidad de un módulo de **Gestión de Finanzas Pe
 > ⚠️ **Datos 100% ficticios.** No es una pieza productiva ni está afiliada oficialmente a BanBif. Identidad de marca usada con fin demostrativo.
 
 ## ✨ Qué incluye
-- 12 pantallas: Login, Inicio, Cuentas, Movimientos, Analiza, Presupuestos, Metas, Salud financiera, Alertas, Más + hojas de detalle.
-- Categorización automática, presupuestos con semáforo, metas de ahorro, Ahorro Vueltos, score de salud financiera, proyección de flujo, insights.
+- 13 pantallas en 3 pilares: *Tu panorama financiero en tiempo real* · *Entiende tus finanzas* · *Alcanza tus metas*.
+- Agregación multibanco (open banking) con gestión de consentimientos, categorización automática, presupuestos con semáforo, metas de ahorro, Ahorro Vueltos, score de salud financiera, proyección de flujo, insights y recomendaciones personalizadas.
 - Gráficos hechos a mano en SVG (donut, barras, línea, sparkline, rings).
-- Identidad BanBif: celeste `#20A6FF` + verde lima `#C4D600`.
+- Lenguaje visual de la BanBif App actual: dark theme azul-noche `#0B0E16`, violeta `#8B5CF6`, cian `#41B9FF`.
 
 ## 🚀 Cómo verlo localmente
 Es estático: cualquier servidor sirve.

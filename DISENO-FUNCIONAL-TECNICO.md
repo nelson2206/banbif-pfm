@@ -12,7 +12,7 @@
 | **Producto** | Módulo PFM ("Mis Finanzas") embebido en la app de banca móvil de BanBif |
 | **Audiencia del demo** | Cliente / sponsor de negocio (no técnico) |
 | **Tipo de pieza** | Mockup interactivo de alta fidelidad (no es producto productivo) |
-| **Dirección de diseño** | Visión aspiracional con identidad real de marca BanBif |
+| **Dirección de diseño** | Lenguaje visual de la BanBif App actual (dark theme: azul-noche, violeta primario, cian para positivos) con visión PFM aspiracional |
 | **Plataforma técnica** | Web app estática (HTML + CSS + JS vanilla), mobile-first, PWA-ready |
 | **Distribución** | URL pública vía GitHub Pages — se escanea/abre en el celular del cliente |
 | **Estado de datos** | 100% simulados (soles PEN, comercios peruanos), sin backend ni datos reales |
@@ -40,8 +40,12 @@
 | C8 | **Proyección de flujo** | Estima cierre de mes y saldo mínimo proyectado | Analiza |
 | C9 | **Alertas proactivas** | Avisos de presupuesto, ingresos, vencimientos, hitos de meta | Alertas |
 | C10 | **Insights contextuales** | Mensajes tipo "gastaste 23% más en Restaurantes" | Inicio |
+| C11 | **Agregación multibanco + consentimientos** | Cuentas de otros bancos vía open banking, con gestión y revocación de consentimientos | Inicio, Cuentas, Conexiones |
+| C12 | **Recomendaciones comerciales** | Ofertas y productos según comportamiento (depósito a plazo, beneficios, metas sugeridas) | Inicio, Metas |
 
-### 1.3 Inventario de pantallas (12)
+La experiencia se organiza en **3 pilares** que estructuran el Home: ① *Tu panorama financiero en tiempo real* (C1, C11) · ② *Entiende tus finanzas y toma mejores decisiones* (C2, C3, C7, C8, C9, C10) · ③ *Alcanza tus metas con recomendaciones para ti* (C5, C6, C12). Detrás operan capacidades de agregación de cuentas, gestión de consentimientos, categorización transaccional, analítica avanzada, generación de insights, recomendaciones comerciales y motores de notificaciones contextuales.
+
+### 1.3 Inventario de pantallas (13)
 
 | Pantalla | Rol | Elementos clave |
 |---|---|---|
@@ -56,6 +60,7 @@
 | **Nueva meta** (sheet) | Creación | Nombre, monto objetivo, aporte sugerido |
 | **Salud financiera** | Asesoría | Score grande, 4 factores con barras, recomendaciones |
 | **Alertas** | Notificaciones | Lista de avisos (no leídos resaltados) |
+| **Conexiones** | Open banking | Bancos conectados (BCP, Interbank), fechas de renovación, consentimientos revocables |
 | **Más / Perfil** | Configuración | Perfil, agrupaciones de ajustes |
 
 ### 1.4 Flujos principales (user journeys)
@@ -73,11 +78,14 @@
 - **Salud financiera:** score compuesto por 4 factores (capacidad de ahorro, nivel de deuda, control de gasto, diversificación), cada uno con su barra; el global colorea el ring (≥75 verde, 55–74 ámbar, <55 rojo).
 - **Proyección de flujo:** estimación de cierre de mes y piso de saldo según recurrentes.
 
-### 1.6 Identidad de marca aplicada (BanBif)
-- **Colores oficiales** (extraídos del logo): **celeste `#20A6FF`** (primario) y **verde lima `#C4D600`** (acento), sobre blanco y neutros.
-- **Uso del color:** celeste = identidad/acciones primarias; lima = positivo, ahorro, logros, CTA destacado; rojo/ámbar/verde sólo para estados de presupuesto y salud.
-- **Tono:** fresco, moderno, cercano — "un banco para todos".
-- **Componentes de marca:** marca gráfica (blob celeste + punto lima), tarjetas redondeadas, tab central destacada (FAB) para "Analiza" como pieza diferencial del PFM.
+### 1.6 Identidad de marca aplicada (BanBif App actual)
+Tomada de las pantallas reales de la app renovada de BanBif (referencias del App Store):
+- **Dark theme** como base: fondo azul-noche `#0B0E16`, superficies `#181D2B`, glows ambientales púrpura-azul.
+- **Violeta `#8B5CF6`** = acción primaria (CTAs, FAB, tab activa, links en lavanda `#B9A8FF`, pills destacando palabras clave en titulares).
+- **Cian `#41B9FF`** = montos positivos/ingresos y acentos de dato (como en la app real, donde los abonos se muestran en celeste).
+- **Semáforos** solo para estados: verde `#34D399` / ámbar `#FBBF24` / rosa `#FB7185` en presupuestos y salud financiera.
+- **Componentes de la app real replicados:** wordmark blanco, tiles oscuros de acceso rápido con borde sutil, tarjetas de movimiento oscuras redondeadas, pill gradiente para destacar palabras ("claras"), números tabulares.
+- *Nota:* la paleta legacy del logotipo (celeste `#20A6FF` + lima `#C4D600`) quedó descartada tras validar contra las capturas de la app actual.
 
 ---
 

@@ -21,9 +21,32 @@ const money0 = n => 'S/ ' + Math.abs(n).toLocaleString('es-PE',{maximumFractionD
 
 /* ---------------- CUENTAS ---------------- */
 const ACCOUNTS = [
-  { id:'sueldo', type:'Cuenta Sueldo',   num:'•••• 4821', bal:12180.50, icon:'i-wallet', cls:'ac-cyan', listColor:'var(--cyan)' },
-  { id:'ahorro', type:'Cuenta Ahorro',   num:'•••• 7745', bal:36070.30, icon:'i-piggy',  cls:'ac-lime', listColor:'var(--lime-600)' },
-  { id:'tc',     type:'Tarjeta Visa Signature', num:'•••• 0192', bal:-2459.00, icon:'i-card', cls:'ac-dark', listColor:'var(--ink)', credit:true, line:15000 },
+  { id:'sueldo', type:'Cuenta Sueldo',   num:'•••• 4821', bal:12180.50, icon:'i-wallet', cls:'ac-blue',   listColor:'var(--cyan)' },
+  { id:'ahorro', type:'Cuenta Ahorro',   num:'•••• 7745', bal:36070.30, icon:'i-piggy',  cls:'ac-purple', listColor:'var(--purple)' },
+  { id:'tc',     type:'Tarjeta Visa Signature', num:'•••• 0192', bal:-2459.00, icon:'i-card', cls:'ac-dark', listColor:'var(--surface-3)', credit:true, line:15000 },
+];
+/* cuentas agregadas vía open banking (otros bancos) */
+const EXT_ACCOUNTS = [
+  { bank:'BCP',       abbr:'B', color:'var(--bcp)', type:'Cuenta Digital', num:'•••• 5530', bal:3850.20,  icon:'i-wallet' },
+  { bank:'Interbank', abbr:'I', color:'var(--ibk)', type:'Tarjeta Oro',    num:'•••• 8814', bal:-1391.20, icon:'i-card', credit:true, line:8000 },
+];
+
+/* ---------------- CONEXIONES Y CONSENTIMIENTOS ---------------- */
+const CONNS = [
+  { bank:'BCP', abbr:'B', color:'var(--bcp)', scope:'Cuentas y movimientos', since:'12 may 2026', renew:'12 nov 2026', on:true },
+  { bank:'Interbank', abbr:'I', color:'var(--ibk)', scope:'Tarjeta de crédito', since:'03 abr 2026', renew:'03 oct 2026', on:true },
+];
+const CONSENTS = [
+  { t:'Usar mis datos para insights y análisis', s:'Categorización, tendencias y salud financiera', on:true },
+  { t:'Recomendaciones personalizadas', s:'Ofertas y productos según tu comportamiento', on:true },
+  { t:'Alertas y notificaciones contextuales', s:'Presupuestos, vencimientos y metas', on:true },
+];
+
+/* ---------------- RECOMENDACIONES ("para ti") ---------------- */
+const RECOS = [
+  { tag:'Para ti', icon:'i-coins', t:'Depósito a plazo · 5.2% TREA', p:'Tienes S/ 9,800 sin movimiento en tu Cuenta Ahorro. En 12 meses ganarías ≈ S/ 510.', cta:'Simular' },
+  { tag:'Club de beneficios', icon:'i-play', t:'50% en Cineplanet los martes', p:'Vas seguido al cine: este beneficio te ahorraría ≈ S/ 29 al mes pagando con tu Visa BanBif.', cta:'Ver beneficio' },
+  { tag:'Meta sugerida', icon:'i-plane', t:'Adelanta tu viaje a Cusco', p:'Subiendo tu aporte a S/ 450/mes llegas en octubre, 2 meses antes de lo planeado.', cta:'Ajustar meta' },
 ];
 
 /* ---------------- MOVIMIENTOS ---------------- */
@@ -78,10 +101,10 @@ const GOALS = [
 
 /* ---------------- SALUD FINANCIERA ---------------- */
 const FACTORS = [
-  { name:'Capacidad de ahorro', val:88, color:'var(--pos)',  icon:'i-piggy',  ico_bg:'var(--pos-bg)',  ico_c:'var(--pos)' },
-  { name:'Nivel de deuda',      val:72, color:'var(--cyan)', icon:'i-card',   ico_bg:'var(--cyan-050)',ico_c:'var(--cyan)' },
-  { name:'Control de gasto',    val:64, color:'var(--warn)', icon:'i-coins',  ico_bg:'var(--warn-bg)', ico_c:'var(--warn)' },
-  { name:'Diversificación',     val:80, color:'var(--lime-600)', icon:'i-spark', ico_bg:'#F4F8D6', ico_c:'var(--lime-600)' },
+  { name:'Capacidad de ahorro', val:88, color:'var(--ok)',   icon:'i-piggy', ico_bg:'var(--ok-bg)',   ico_c:'var(--ok)' },
+  { name:'Nivel de deuda',      val:72, color:'var(--cyan)', icon:'i-card',  ico_bg:'var(--pos-bg)',  ico_c:'var(--cyan)' },
+  { name:'Control de gasto',    val:64, color:'var(--warn)', icon:'i-coins', ico_bg:'var(--warn-bg)', ico_c:'var(--warn)' },
+  { name:'Diversificación',     val:80, color:'var(--purple-2)', icon:'i-spark', ico_bg:'rgba(139,92,246,.15)', ico_c:'var(--purple-2)' },
 ];
 const TIPS = [
   { ic:'i-flame', t:'<b>Restaurantes</b> es tu categoría que más crece. Bajarla 15% sube tu puntaje a 85.' },
@@ -95,12 +118,12 @@ const NOTIFS = [
   { unread:true, ico:'i-up',    c:'var(--pos)',  t:'Ingreso recibido', p:'Plin de Carlos · S/ 120.00', time:'Ayer' },
   { unread:false, ico:'i-target', c:'var(--cyan)', t:'¡Meta al 64%!', p:'Fondo de emergencia: S/ 9,800 de S/ 15,000.', time:'9 jun' },
   { unread:false, ico:'i-receipt', c:'var(--warn)', t:'Recordatorio de pago', p:'Tarjeta Visa vence en 4 días.', time:'8 jun' },
-  { unread:false, ico:'i-piggy', c:'var(--lime-600)', t:'Ahorro Vueltos', p:'Redondeaste S/ 86.40 este mes.', time:'7 jun' },
+  { unread:false, ico:'i-piggy', c:'var(--purple)', t:'Ahorro Vueltos', p:'Redondeaste S/ 86.40 este mes.', time:'7 jun' },
 ];
 
 /* ---------------- MÁS ---------------- */
 const MORE = [
-  [ {ic:'i-user',t:'Datos personales'}, {ic:'i-card',t:'Tarjetas y cuentas'}, {ic:'i-shield',t:'Seguridad y Face ID'} ],
+  [ {ic:'i-user',t:'Datos personales'}, {ic:'i-shield',t:'Bancos conectados y consentimientos', go:'consents'}, {ic:'i-card',t:'Tarjetas y cuentas'} ],
   [ {ic:'i-bell',t:'Notificaciones y alertas'}, {ic:'i-coins',t:'Categorías y reglas'}, {ic:'i-spark',t:'Ahorro automático'} ],
   [ {ic:'i-help',t:'Centro de ayuda'}, {ic:'i-gear',t:'Configuración'} ],
 ];
@@ -165,7 +188,7 @@ function lineChart(node, pts, {w=300,h=120,color='var(--cyan)'}={}){
 /* ----- ring label + progress ----- */
 function setRing(node){
   const score=+node.dataset.score;
-  const col = score>=75?'var(--pos)':score>=55?'var(--warn)':'var(--neg)';
+  const col = score>=75?'var(--ok)':score>=55?'var(--warn)':'var(--neg)';
   node.style.setProperty('--p',score);
   node.style.setProperty('--col',col);
   node.setAttribute('data-label',score);
@@ -175,22 +198,80 @@ function setRing(node){
    RENDERERS POR PANTALLA
    ============================================================ */
 function renderAccountsRail(){
-  $('#accountsRail').innerHTML = ACCOUNTS.map(a=>`
+  const own = ACCOUNTS.map(a=>`
     <div class="acct-card ${a.cls}" data-nav="transactions">
       <div class="ac-type">${icon(a.icon)} ${a.type}</div>
-      <div class="ac-bal">${a.credit? '-'+money(a.bal).replace('S/ ','S/ ') : money(a.bal)}</div>
+      <div class="ac-bal">${a.credit? '-'+money(a.bal) : money(a.bal)}</div>
       <div class="ac-num">${a.num}</div>
       <div class="ac-ico">${icon(a.icon)}</div>
     </div>`).join('');
+  const ext = EXT_ACCOUNTS.map(a=>`
+    <div class="acct-card ac-ext" data-nav="accounts">
+      <span class="ext-tag">Open Banking</span>
+      <div class="ac-type"><span class="ext-chip" style="background:${a.color}">${a.abbr}</span> ${a.bank} · ${a.type}</div>
+      <div class="ac-bal">${a.credit? '-'+money(a.bal) : money(a.bal)}</div>
+      <div class="ac-num">${a.num}</div>
+    </div>`).join('');
+  const add = `<button class="acct-card ac-add" data-go="consents"><span class="qi-ic">${icon('i-plus')}</span>Conectar otro banco</button>`;
+  $('#accountsRail').innerHTML = own + ext + add;
 }
-function renderAccountsList(){
-  $('#accountsList').innerHTML = ACCOUNTS.map(a=>`
-    <div class="acct-row" data-nav="transactions">
-      <div class="acct-ico" style="background:${a.listColor}">${icon(a.icon)}</div>
-      <div class="acct-meta"><b>${a.type}</b><span>${a.num}${a.credit?' · Línea '+money0(a.line):''}</span></div>
+function acctRow(a, extBank){
+  const ico = extBank
+    ? `<div class="acct-ico" style="background:${a.color}"><b style="font-size:16px">${a.abbr}</b></div>`
+    : `<div class="acct-ico" style="background:${a.listColor}">${icon(a.icon)}</div>`;
+  const name = extBank ? `${a.bank} · ${a.type}` : a.type;
+  return `<div class="acct-row" data-nav="transactions">
+      ${ico}
+      <div class="acct-meta"><b>${name}</b><span>${a.num}${a.credit?' · Línea '+money0(a.line):''}</span></div>
       <div class="acct-amt ${a.credit?'neg':''}">${a.credit?'-'+money(a.bal):money(a.bal)}
         <small>${a.credit?'Por pagar':'Disponible'}</small></div>
+    </div>`;
+}
+function renderAccountsList(){
+  $('#accountsList').innerHTML =
+    `<div class="group-lbl">BanBif</div>` +
+    ACCOUNTS.map(a=>acctRow(a,false)).join('') +
+    `<div class="group-lbl">Otros bancos <span class="ext-tag">Open Banking</span></div>` +
+    EXT_ACCOUNTS.map(a=>acctRow(a,true)).join('') +
+    `<button class="acct-row" data-go="consents" style="width:100%">
+      <div class="acct-ico" style="background:var(--surface-3)">${icon('i-shield')}</div>
+      <div class="acct-meta" style="text-align:left"><b>Conexiones y consentimientos</b><span>2 bancos conectados · administrar</span></div>
+      <svg class="ic" style="color:var(--muted)"><use href="#i-chev"/></svg>
+    </button>`;
+}
+function renderConsents(){
+  $('#connList').innerHTML = CONNS.map(c=>`
+    <div class="conn">
+      <div class="conn-top">
+        <div class="acct-ico" style="background:${c.color};width:42px;height:42px"><b style="font-size:15px">${c.abbr}</b></div>
+        <div class="conn-meta"><b>${c.bank}</b><span>${c.scope}</span></div>
+        <label class="switch"><input type="checkbox" ${c.on?'checked':''} /><span class="track"></span></label>
+      </div>
+      <div class="conn-foot"><span>Conectado: <b>${c.since}</b></span><span>Renueva: <b>${c.renew}</b></span></div>
     </div>`).join('');
+  $('#consentList').innerHTML = CONSENTS.map(c=>`
+    <div class="conn"><div class="conn-top">
+      <div class="conn-meta"><b>${c.t}</b><span>${c.s}</span></div>
+      <label class="switch"><input type="checkbox" ${c.on?'checked':''} /><span class="track"></span></label>
+    </div></div>`).join('');
+}
+function recoCard(r){
+  return `<div class="reco">
+    <div class="reco-ic">${icon(r.icon)}</div>
+    <div class="reco-body"><span class="reco-tag">${r.tag}</span><b>${r.t}</b>${r.p}
+      <button class="link">${r.cta} <svg class="ic sm"><use href="#i-chev"/></svg></button></div>
+  </div>`;
+}
+function renderRecos(){
+  $('#recoList').innerHTML = RECOS.map(recoCard).join('');
+  $('#homeReco').innerHTML = recoCard(RECOS[0]);
+}
+function renderGoalsMini(){
+  $('#goalsMini').innerHTML = GOALS.map(g=>{
+    const pct=Math.round(g.saved/g.target*100);
+    return `<div class="gm" data-nav="goals"><b>${g.name}</b><span class="gm-pct">${pct}% · faltan ${money0(g.target-g.saved)}</span>
+      <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div></div>`;
+  }).join('');
 }
 
 function catList(node, data, total){
@@ -285,7 +366,7 @@ function renderNotifs(){
 
 function renderMore(){
   $('#moreList').innerHTML=MORE.map(grp=>`<div class="more-grp">${grp.map(it=>`
-    <div class="more-it"><div class="more-ico">${icon(it.ic)}</div><b>${it.t}</b><svg class="ic chev"><use href="#i-chev"/></svg></div>`).join('')}</div>`).join('');
+    <button class="more-it"${it.go?` data-go="${it.go}"`:''}><div class="more-ico">${icon(it.ic)}</div><b>${it.t}</b><svg class="ic chev"><use href="#i-chev"/></svg></button>`).join('')}</div>`).join('');
 }
 
 /* ----- txn detail sheet ----- */
@@ -319,7 +400,7 @@ const charts = { home:false, analyze:false };
 function paintView(id){
   // lazy charts
   if(id==='home'){
-    sparkline($('#heroSpark'), [30,33,31,36,34,40,38,44,42,48], {color:'#fff',fill:'rgba(255,255,255,.22)'});
+    sparkline($('#heroSpark'), [30,33,31,36,34,40,38,44,42,48], {color:'#7AD0FF',fill:'rgba(65,185,255,.16)'});
     donut($('#homeDonut'), SPEND.map(s=>({amt:s.amt,color:CATS[s.cat].color})));
     catList($('#homeCatList'), SPEND, SPEND.reduce((a,b)=>a+b.amt,0));
   }
@@ -334,12 +415,10 @@ function paintView(id){
 function go(id, push=true){
   $$('.view').forEach(v=>v.classList.toggle('is-active', v.dataset.view===id));
   // tab highlight (sub-views map to their parent tab)
-  const tabFor = TABS.includes(id)?id:(id==='budgets'||id==='health'?'analyze':(id==='accounts'||id==='notifications'?'home':'home'));
+  const tabFor = TABS.includes(id)?id:(id==='budgets'||id==='health'?'analyze':(id==='consents'?'more':'home'));
   $$('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabFor));
   // scroll top
   const v=$(`.view[data-view="${id}"]`); if(v) v.scrollTop=0;
-  // status bar color on splash
-  $('#screen').classList.toggle('on-splash', id==='splash');
   paintView(id);
   if(push){ if(TABS.includes(id)) stack=[id]; else stack.push(id); }
 }
@@ -388,9 +467,9 @@ document.addEventListener('input', e=>{
 function init(){
   renderAccountsRail(); renderAccountsList();
   renderChips(); renderTxns();
-  renderBudgets(); renderGoals(); renderHealth(); renderNotifs(); renderMore();
+  renderBudgets(); renderGoals(); renderGoalsMini(); renderRecos();
+  renderHealth(); renderNotifs(); renderMore(); renderConsents();
   $$('.ring').forEach(setRing);
-  // simulate live clock in status bar
   go('splash', false);
 }
 document.addEventListener('DOMContentLoaded', init);

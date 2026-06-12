@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
+<meta name="theme-color" content="#20A6FF" />
+<meta name="description" content="BanBif PFM — Mockup demostrativo de gestor de finanzas personales. Datos ficticios." />
+<title>BanBif · Mis Finanzas (PFM)</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-pie" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 3.5a8 8 0 0 1 7.5 7.5H13z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><circle cx="6" cy="6" r="1.6" fill="currentColor"/><circle cx="12" cy="6" r="1.6" fill="currentColor"/><circle cx="18" cy="6" r="1.6" fill="currentColor"/><circle cx="6" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="18" cy="12" r="1.6" fill="currentColor"/><circle cx="6" cy="18" r="1.6" fill="currentColor"/><circle cx="12" cy="18" r="1.6" fill="currentColor"/><circle cx="18" cy="18" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 19a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 10.6a3 3 0 0 0 4.2 4.2M9.4 5.3A9.8 9.8 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.2 6.2A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 3.4-.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 7h12l-3-3M17 17H5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-2-1.2-2 1.2-2-1.2-2 1.2-2-1.2L6 21z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8h6M9 12h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M11 18h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M5 19 19 5M9 5h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M5 5 19 19M19 9v10H9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a1 1 0 0 0 1 .8h8.4a1 1 0 0 0 1-.8L20 7H6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="currentColor"/><circle cx="17" cy="20" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 3v8a2 2 0 0 0 4 0V3M8 3v18M17 3c-1.5 1-2 3-2 5s.5 4 2 5v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 11h16M8 20v-4M16 20v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="8" cy="13.5" r="1" fill="currentColor"/><circle cx="16" cy="13.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 9.5v5l4-2.5z" fill="currentColor"/></symbol>
+    <symbol id="i-health" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9-9a4.5 4.5 0 0 1 9-2 4.5 4.5 0 0 1 9 2c-2 4.5-9 9-9 9Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h6v16H6a2 2 0 0 0-2 2zM20 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-piggy" viewBox="0 0 24 24"><path d="M4 12a6 6 0 0 1 6-6h3a6 6 0 0 1 6 5l2 1-1 3-1 .5A6 6 0 0 1 17 19v2h-3v-1h-2v1H9v-2a6 6 0 0 1-5-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10 13 3 11l1-2 7 1 5-7 2 1-3 8 4 5-2 1-5-4-3 5-2-1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2 20h20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9ZM12 12v6a2.5 2.5 0 0 0 5 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M19 5l-2 2M7 17l-2 2M19 19l-2-2M7 7 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 20a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4-2v-4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3-1 4-1 6a3 3 0 0 0 6 0c0-1 0-1 0-2 2 2 3 4 3 7a8 8 0 0 1-16 0c0-4 4-6 5-9 1 1 2 2 3 3 .5-2 0-3 0-5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 9.5h18" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2H6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="7" width="18" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="13" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="6" rx="5" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 6v5c0 1.4 2.2 2.5 5 2.5M4 11c0 1.4 2.2 2.5 5 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><ellipse cx="15" cy="14" rx="5" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 14v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="currentColor"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M4 4h7l9 9-7 7-9-9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path d="M6 4v6a4 4 0 0 0 4 4h4M18 4v6a4 4 0 0 1-4 4M14 11l4 3-4 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ DEMO STAGE (desktop framing) ============ -->
+<div class="stage">
+  <aside class="stage-aside">
+    <div class="stage-logo"><span class="logo-mark" aria-hidden="true"></span> BanBif <em>· PFM</em></div>
+    <h1>Mis Finanzas</h1>
+    <p>Mockup demostrativo del módulo de <strong>Gestión de Finanzas Personales</strong> (PFM) para la BanBif App.</p>
+    <ul class="stage-points">
+      <li><svg class="ic"><use href="#i-pie"/></svg> Categorización automática de movimientos</li>
+      <li><svg class="ic"><use href="#i-target"/></svg> Presupuestos, metas y ahorro inteligente</li>
+      <li><svg class="ic"><use href="#i-health"/></svg> Salud financiera y proyección de flujo</li>
+    </ul>
+    <div class="stage-note">📱 Ábrelo en tu celular para la experiencia completa. Datos 100% ficticios.</div>
+  </aside>
+
+  <!-- ============ PHONE DEVICE ============ -->
+  <div class="phone" id="phone">
+    <div class="phone-island"></div>
+    <div class="screen" id="screen">
+
+      <!-- status bar -->
+      <div class="statusbar">
+        <span class="sb-time">9:41</span>
+        <span class="sb-right"><span class="sb-net"></span><span class="sb-wifi"></span><span class="sb-bat"></span></span>
+      </div>
+
+      <!-- ============ SPLASH / LOGIN ============ -->
+      <section class="view is-active view-splash" data-view="splash">
+        <div class="splash-bg"></div>
+        <div class="splash-inner">
+          <div class="splash-brand">
+            <span class="logo-mark lg" aria-hidden="true"></span>
+            <span class="splash-word">BanBif</span>
+          </div>
+          <p class="splash-tag">Tu dinero, claro y bajo control.</p>
+          <div class="splash-card">
+            <div class="splash-avatar">VR</div>
+            <div>
+              <div class="splash-hi">Hola, Valeria</div>
+              <div class="splash-sub">Ingresa para ver tus finanzas</div>
+            </div>
+          </div>
+          <button class="btn btn-lime btn-block" data-go="home">Ingresar con Face ID</button>
+          <button class="btn btn-ghost-light btn-block" data-go="home">Usar clave</button>
+          <div class="splash-foot">Demo · sin datos reales · v1.0</div>
+        </div>
+      </section>
+
+      <!-- ============ HOME ============ -->
+      <section class="view view-scroll" data-view="home">
+        <header class="apphead">
+          <div class="apphead-user">
+            <div class="avatar">VR</div>
+            <div>
+              <div class="apphead-hi">Hola, Valeria 👋</div>
+              <div class="apphead-sub">Miércoles, 11 jun</div>
+            </div>
+          </div>
+          <button class="iconbtn" data-go="notifications" aria-label="Notificaciones">
+            <svg class="ic"><use href="#i-bell"/></svg><span class="badge-dot"></span>
+          </button>
+        </header>
+
+        <div class="pad">
+          <!-- Net worth hero -->
+          <div class="hero-card">
+            <div class="hero-top">
+              <span>Patrimonio total</span>
+              <button class="eyebtn" id="eyeToggle" aria-label="Mostrar/ocultar saldo"><svg class="ic"><use href="#i-eye"/></svg></button>
+            </div>
+            <div class="hero-amount" data-amount="48250.80">S/ 48,250.80</div>
+            <div class="hero-row">
+              <span class="hero-pill up"><svg class="ic"><use href="#i-up"/></svg> +S/ 1,240 este mes</span>
+              <span class="hero-mini">Disponible S/ 12,180</span>
+            </div>
+            <div class="hero-spark" id="heroSpark"></div>
+          </div>
+
+          <!-- Quick actions -->
+          <div class="quick">
+            <button class="quick-it"><span class="qi-ic"><svg class="ic"><use href="#i-swap"/></svg></span>Transferir</button>
+            <button class="quick-it"><span class="qi-ic"><svg class="ic"><use href="#i-receipt"/></svg></span>Pagar</button>
+            <button class="quick-it"><span class="qi-ic"><svg class="ic"><use href="#i-phone"/></svg></span>Recargar</button>
+            <button class="quick-it" data-go="goals"><span class="qi-ic"><svg class="ic"><use href="#i-target"/></svg></span>Metas</button>
+          </div>
+
+          <!-- Accounts carousel -->
+          <div class="sec-head">
+            <h2>Mis cuentas</h2>
+            <button class="link" data-go="accounts">Ver todas <svg class="ic sm"><use href="#i-chev"/></svg></button>
+          </div>
+          <div class="cards-rail" id="accountsRail"></div>
+
+          <!-- Financial health -->
+          <div class="health-card" data-go="health">
+            <div class="ring" id="healthRing" data-score="78"></div>
+            <div class="health-body">
+              <div class="health-title">Salud financiera <span class="chip chip-good">Buena</span></div>
+              <p>Tu nivel de ahorro mejoró. Reduce <b>Restaurantes</b> para llegar a 85.</p>
+              <span class="link">Ver detalle <svg class="ic sm"><use href="#i-chev"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Month summary -->
+          <div class="sec-head">
+            <h2>Este mes</h2>
+            <button class="link" data-go="analyze">Analizar <svg class="ic sm"><use href="#i-chev"/></svg></button>
+          </div>
+          <div class="month-card">
+            <div class="month-cols">
+              <div class="mc">
+                <span class="mc-dot in"></span><span class="mc-lbl">Ingresos</span>
+                <div class="mc-val">S/ 8,400</div>
+              </div>
+              <div class="mc">
+                <span class="mc-dot out"></span><span class="mc-lbl">Gastos</span>
+                <div class="mc-val">S/ 5,160</div>
+              </div>
+              <div class="mc">
+                <span class="mc-dot save"></span><span class="mc-lbl">Ahorro</span>
+                <div class="mc-val">S/ 3,240</div>
+              </div>
+            </div>
+            <div class="flowbar"><span class="flow-in" style="width:100%"></span><span class="flow-out" style="width:61%"></span></div>
+            <div class="flow-legend"><span>Ahorras el <b>38%</b> de tus ingresos</span><span class="tag-ok">Meta 30% ✓</span></div>
+          </div>
+
+          <!-- Spend by category preview -->
+          <div class="sec-head">
+            <h2>¿En qué gastas?</h2>
+            <button class="link" data-go="analyze">Ver todo <svg class="ic sm"><use href="#i-chev"/></svg></button>
+          </div>
+          <div class="cat-preview">
+            <div class="donut-wrap"><div class="donut" id="homeDonut"></div><div class="donut-center"><b>S/ 5,160</b><span>gastado</span></div></div>
+            <ul class="cat-mini" id="homeCatList"></ul>
+          </div>
+
+          <!-- Insight -->
+          <div class="insight">
+            <span class="insight-ic"><svg class="ic"><use href="#i-spark"/></svg></span>
+            <div>
+              <b>Gastaste 23% más en Restaurantes</b> que en mayo (S/ 980 vs S/ 800). Te quedan <b>S/ 220</b> de tu presupuesto.
+              <button class="link" data-go="budgets">Ajustar presupuesto</button>
+            </div>
+          </div>
+
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ ACCOUNTS ============ -->
+      <section class="view view-scroll" data-view="accounts">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Mis cuentas</h1>
+          <button class="iconbtn" aria-label="Agregar"><svg class="ic"><use href="#i-plus"/></svg></button>
+        </header>
+        <div class="pad">
+          <div class="net-strip">
+            <div><span>Activos</span><b class="pos">S/ 50,710</b></div>
+            <div><span>Deudas</span><b class="neg">S/ 2,459</b></div>
+            <div><span>Neto</span><b>S/ 48,251</b></div>
+          </div>
+          <div id="accountsList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ TRANSACTIONS ============ -->
+      <section class="view view-scroll" data-view="transactions">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Movimientos</h1>
+          <button class="iconbtn" aria-label="Filtrar"><svg class="ic"><use href="#i-filter"/></svg></button>
+        </header>
+        <div class="search-row">
+          <span class="search-box"><svg class="ic"><use href="#i-search"/></svg><input id="txnSearch" placeholder="Buscar comercio o categoría" /></span>
+        </div>
+        <div class="chips" id="txnChips"></div>
+        <div class="pad pad-tight">
+          <div id="txnList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ ANALYZE ============ -->
+      <section class="view view-scroll" data-view="analyze">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Analiza</h1>
+          <button class="iconbtn" data-go="budgets" aria-label="Presupuestos"><svg class="ic"><use href="#i-coins"/></svg></button>
+        </header>
+        <div class="month-switch">
+          <button class="ms-arrow" aria-label="Mes anterior"><svg class="ic" style="transform:rotate(180deg)"><use href="#i-chev"/></svg></button>
+          <span>Junio 2026</span>
+          <button class="ms-arrow" aria-label="Mes siguiente"><svg class="ic"><use href="#i-chev"/></svg></button>
+        </div>
+        <div class="pad">
+          <!-- Income vs expense bars -->
+          <div class="panel">
+            <div class="panel-head"><h3>Ingresos vs Gastos</h3><span class="muted">últimos 6 meses</span></div>
+            <div class="bars" id="ieBars"></div>
+            <div class="bars-legend"><span><i class="sw in"></i>Ingresos</span><span><i class="sw out"></i>Gastos</span></div>
+          </div>
+
+          <!-- Category donut -->
+          <div class="panel">
+            <div class="panel-head"><h3>Gasto por categoría</h3><span class="muted">Junio</span></div>
+            <div class="cat-preview">
+              <div class="donut-wrap"><div class="donut" id="analyzeDonut"></div><div class="donut-center"><b>S/ 5,160</b><span>total</span></div></div>
+              <ul class="cat-mini" id="analyzeCatList"></ul>
+            </div>
+          </div>
+
+          <!-- Trend line -->
+          <div class="panel">
+            <div class="panel-head"><h3>Tendencia de gasto</h3><span class="muted">diario</span></div>
+            <div class="line-wrap" id="trendLine"></div>
+            <div class="trend-foot"><span class="hero-pill down sm"><svg class="ic"><use href="#i-down"/></svg> 8% vs mayo</span><span class="muted">Proyección fin de mes: <b>S/ 5,400</b></span></div>
+          </div>
+
+          <!-- Cashflow projection -->
+          <div class="panel panel-flow">
+            <div class="panel-head"><h3>Flujo proyectado</h3><span class="muted">a 30 días</span></div>
+            <p class="flow-text">Con tus ingresos y gastos recurrentes, cerrarás junio con <b class="pos">+S/ 3,000</b>. Tu saldo no bajará de <b>S/ 9,800</b>.</p>
+            <div class="flow-projbar"><span style="width:72%"></span></div>
+          </div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ BUDGETS ============ -->
+      <section class="view view-scroll" data-view="budgets">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Presupuestos</h1>
+          <button class="iconbtn" aria-label="Editar"><svg class="ic"><use href="#i-plus"/></svg></button>
+        </header>
+        <div class="pad">
+          <div class="budget-hero">
+            <div class="ring lg" id="budgetRing" data-score="71"></div>
+            <div>
+              <div class="bh-lbl">Presupuesto de junio</div>
+              <div class="bh-amount">S/ 5,160 <span>/ 7,200</span></div>
+              <div class="bh-sub">Te quedan <b>S/ 2,040</b> · 19 días restantes</div>
+            </div>
+          </div>
+          <div id="budgetList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ GOALS ============ -->
+      <section class="view view-scroll" data-view="goals">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Metas de ahorro</h1>
+          <button class="iconbtn" id="newGoalBtn" aria-label="Nueva meta"><svg class="ic"><use href="#i-plus"/></svg></button>
+        </header>
+        <div class="pad">
+          <div class="roundup">
+            <div class="roundup-l"><span class="qi-ic lime"><svg class="ic"><use href="#i-piggy"/></svg></span>
+              <div><b>Ahorro Vueltos</b><span>Redondea cada compra al sol y ahorra</span></div>
+            </div>
+            <label class="switch"><input type="checkbox" checked /><span class="track"></span></label>
+          </div>
+          <div class="roundup-stat">Este mes redondeaste <b>S/ 86.40</b> sin darte cuenta ✨</div>
+          <div id="goalsList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ HEALTH ============ -->
+      <section class="view view-scroll" data-view="health">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Salud financiera</h1>
+          <span style="width:40px"></span>
+        </header>
+        <div class="pad">
+          <div class="score-hero">
+            <div class="ring xl" id="healthRingBig" data-score="78"></div>
+            <div class="score-cap">Buena · subiste <b>+6</b> pts</div>
+            <p class="muted center">Tu puntaje resume ahorro, deuda, gasto y diversificación.</p>
+          </div>
+          <div id="healthFactors"></div>
+          <div class="sec-head"><h2>Recomendaciones</h2></div>
+          <div id="healthTips"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ NOTIFICATIONS ============ -->
+      <section class="view view-scroll" data-view="notifications">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Alertas</h1>
+          <span style="width:40px"></span>
+        </header>
+        <div class="pad">
+          <div id="notifList"></div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ MORE ============ -->
+      <section class="view view-scroll" data-view="more">
+        <header class="subhead solo">
+          <h1>Más</h1>
+        </header>
+        <div class="pad">
+          <div class="profile-card">
+            <div class="avatar lg">VR</div>
+            <div><div class="pc-name">Valeria Ríos Quispe</div><div class="pc-sub">valeria.rios@email.com · Cliente Premium</div></div>
+          </div>
+          <div id="moreList"></div>
+          <div class="demo-tag">BanBif PFM · Mockup demostrativo · Datos ficticios</div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
+      <!-- ============ TXN DETAIL SHEET ============ -->
+      <div class="sheet-scrim" id="scrim"></div>
+      <div class="sheet" id="txnSheet">
+        <div class="sheet-grab"></div>
+        <div id="txnSheetBody"></div>
+      </div>
+
+      <!-- ============ NEW GOAL SHEET ============ -->
+      <div class="sheet" id="goalSheet">
+        <div class="sheet-grab"></div>
+        <div class="sheet-pad">
+          <h3 class="sheet-title">Nueva meta</h3>
+          <label class="field"><span>¿Para qué ahorras?</span><input id="ngName" placeholder="Ej. Viaje a Europa" value="Viaje a Europa" /></label>
+          <label class="field"><span>Monto objetivo (S/)</span><input id="ngAmount" inputmode="numeric" placeholder="10000" value="12000" /></label>
+          <div class="field"><span>Aporte sugerido</span><div class="pill-row"><button class="pillopt active">S/ 600/mes</button><button class="pillopt">S/ 1000/mes</button><button class="pillopt">Otro</button></div></div>
+          <button class="btn btn-primary btn-block" id="createGoal">Crear meta</button>
+        </div>
+      </div>
+
+      <!-- bottom nav -->
+      <nav class="tabbar" id="tabbar">
+        <button class="tab" data-tab="home"><svg class="ic"><use href="#i-home"/></svg><span>Inicio</span></button>
+        <button class="tab" data-tab="transactions"><svg class="ic"><use href="#i-list"/></svg><span>Movim.</span></button>
+        <button class="tab tab-mid" data-tab="analyze"><span class="tab-fab"><svg class="ic"><use href="#i-pie"/></svg></span><span>Analiza</span></button>
+        <button class="tab" data-tab="goals"><svg class="ic"><use href="#i-target"/></svg><span>Metas</span></button>
+        <button class="tab" data-tab="more"><svg class="ic"><use href="#i-grid"/></svg><span>Más</span></button>
+      </nav>
+
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

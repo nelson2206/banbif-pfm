@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
 <meta name="theme-color" content="#0B0E16" />
 <meta name="description" content="BanBif PFM — Mockup demostrativo de gestor de finanzas personales. Datos ficticios." />
+<!-- iPhone: comportamiento de app nativa al anclar a pantalla de inicio -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BanBif" />
+<link rel="apple-touch-icon" href="assets/icon-180.png" />
 <title>BanBif · Mis Finanzas (PFM)</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%238B5CF6'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-size='17' font-weight='800' fill='white'%3EB%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="styles.css" />
@@ -96,9 +102,9 @@
           </div>
           <p class="splash-tag">Tus finanzas, <span class="hl">claras</span><br />y en un solo lugar</p>
           <div class="splash-card">
-            <div class="splash-avatar">VR</div>
+            <div class="splash-avatar">NB</div>
             <div>
-              <div class="splash-hi">Hola, Valeria</div>
+              <div class="splash-hi">Hola, Nelson</div>
               <div class="splash-sub">Ingresa para ver tus finanzas</div>
             </div>
           </div>
@@ -112,9 +118,9 @@
       <section class="view view-scroll" data-view="home">
         <header class="apphead">
           <div class="apphead-user">
-            <div class="avatar">VR</div>
+            <div class="avatar">NB</div>
             <div>
-              <div class="apphead-hi">Hola, Valeria 👋</div>
+              <div class="apphead-hi">Hola, Nelson 👋</div>
               <div class="apphead-sub">Miércoles, 11 jun</div>
             </div>
           </div>
@@ -409,8 +415,8 @@
         </header>
         <div class="pad">
           <div class="profile-card">
-            <div class="avatar lg">VR</div>
-            <div><div class="pc-name">Valeria Ríos Quispe</div><div class="pc-sub">valeria.rios@email.com · Cliente Premium</div></div>
+            <div class="avatar lg">NB</div>
+            <div><div class="pc-name">Nelson Bernal</div><div class="pc-sub">nelson.bernal@email.com · Cliente Premium</div></div>
           </div>
           <div id="moreList"></div>
           <div class="demo-tag">BanBif PFM · Mockup demostrativo · Datos ficticios</div>
@@ -436,6 +442,9 @@
           <button class="btn btn-primary btn-block" id="createGoal">Crear meta</button>
         </div>
       </div>
+
+      <!-- iPhone home indicator (solo en el frame de escritorio) -->
+      <div class="home-indicator" aria-hidden="true"></div>
 
       <!-- bottom nav -->
       <nav class="tabbar" id="tabbar">

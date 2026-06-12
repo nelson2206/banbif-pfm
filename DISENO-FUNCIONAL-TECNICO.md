@@ -24,7 +24,7 @@
 ## 1. Diseño funcional
 
 ### 1.1 Persona de referencia
-**Valeria Ríos Quispe**, 31 años, profesional dependiente en Lima, cliente Premium. Recibe sueldo por BanBif, usa tarjeta de crédito, hace Yape/Plin, quiere ahorrar para metas concretas y "no sabe en qué se le va la plata". Es el perfil que más valor obtiene de un PFM.
+**Nelson Bernal**, profesional dependiente en Lima, cliente Premium. Recibe sueldo por BanBif, usa tarjeta de crédito, hace Yape/Plin, quiere ahorrar para metas concretas y "no sabe en qué se le va la plata". Es el perfil que más valor obtiene de un PFM.
 
 ### 1.2 Mapa de capacidades PFM (alcance funcional)
 

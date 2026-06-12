@@ -493,6 +493,14 @@ input{font-family:inherit}
 .tab-mid.active{color:var(--cyan-2)}
 .tab-fab .ic{width:24px;height:24px}
 
+/* ---------- iPhone home indicator (simulado en el frame) ---------- */
+.home-indicator{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);width:128px;height:5px;border-radius:3px;background:rgba(255,255,255,.55);z-index:45;pointer-events:none}
+
+/* en standalone (anclado al inicio en iPhone) el status bar real reemplaza al simulado */
+@media (display-mode: standalone){
+  .statusbar{visibility:hidden}
+}
+
 /* ============================================================
    RESPONSIVE — pantalla completa en celulares reales
    ============================================================ */
@@ -508,6 +516,8 @@ input{font-family:inherit}
   .view-splash{inset:0}
   .tabbar{padding-bottom:env(safe-area-inset-bottom,0px);height:calc(74px + env(safe-area-inset-bottom,0px))}
   .end-space{height:120px}
+  /* el iPhone real ya tiene su propio home indicator */
+  .home-indicator{display:none}
 }
 @media (min-width:761px) and (max-width:980px){
   .stage{gap:36px;padding:24px}

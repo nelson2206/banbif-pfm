@@ -218,6 +218,16 @@
             </div>
           </div>
 
+          <!-- BIA CTA -->
+          <button class="bia-cta" id="biaCta">
+            <span class="bia-cta-avatar"><span>B</span></span>
+            <span class="bia-cta-body">
+              <b>Pregúntale a BIA</b>
+              <span>Tu asistente financiero detectó <b>S/ 124</b> de ahorro mensual</span>
+            </span>
+            <svg class="ic"><use href="#i-chev"/></svg>
+          </button>
+
           <!-- ════ PILAR 3 ════ -->
           <span class="overline">Alcanza tus metas con recomendaciones para ti</span>
           <div class="sec-head">
@@ -410,6 +420,42 @@
         </div>
       </section>
 
+      <!-- ============ SUBSCRIPTIONS ============ -->
+      <section class="view view-scroll" data-view="subs">
+        <header class="subhead">
+          <button class="iconbtn back" data-back aria-label="Atrás"><svg class="ic"><use href="#i-back"/></svg></button>
+          <h1>Suscripciones</h1>
+          <button class="iconbtn" aria-label="Ajustes"><svg class="ic"><use href="#i-gear"/></svg></button>
+        </header>
+        <div class="pad">
+          <div class="subs-hero">
+            <span class="subs-tag"><svg class="ic"><use href="#i-spark"/></svg> Detectado por BIA</span>
+            <div class="subs-hero-amt"><b>S/ 386.49</b><span>/ mes</span></div>
+            <div class="subs-hero-sub">≈ S/ 4,637 al año en <b>8 suscripciones</b> activas</div>
+            <div class="subs-hero-row">
+              <span class="hero-pill up"><svg class="ic"><use href="#i-piggy"/></svg> Ahorro potencial S/ 152.80/mes</span>
+            </div>
+          </div>
+
+          <div class="sub-alert">
+            <div class="sub-alert-ic"><svg class="ic"><use href="#i-flame"/></svg></div>
+            <div>
+              <b>3 suscripciones sin uso reciente</b>
+              <p>No abriste estas apps hace más de 45 días. Cancelarlas no afecta tu salud financiera.</p>
+            </div>
+          </div>
+
+          <div class="sec-head"><h2>Tus suscripciones</h2><span class="muted" style="font-size:11.5px">ordenadas por monto</span></div>
+          <div id="subsList"></div>
+
+          <div class="consent-note" style="margin-top:18px">
+            <svg class="ic"><use href="#i-shield"/></svg>
+            <span>BIA detecta suscripciones cruzando comercio + monto recurrente + intervalo. Puedes excluir cualquiera marcándola como gasto puntual.</span>
+          </div>
+          <div class="end-space"></div>
+        </div>
+      </section>
+
       <!-- ============ MORE ============ -->
       <section class="view view-scroll" data-view="more">
         <header class="subhead solo">
@@ -444,6 +490,34 @@
           <button class="btn btn-primary btn-block" id="createGoal">Crear meta</button>
         </div>
       </div>
+
+      <!-- ============ BIA · CHAT ASSISTANT ============ -->
+      <div class="bia-sheet" id="biaSheet">
+        <header class="bia-head">
+          <button class="iconbtn back" id="biaClose" aria-label="Cerrar"><svg class="ic"><use href="#i-x"/></svg></button>
+          <div class="bia-avatar"><span>B</span></div>
+          <div class="bia-meta">
+            <b>BIA <span class="bia-badge">IA</span></b>
+            <span><span class="bia-dot"></span>En línea · responde al instante</span>
+          </div>
+          <button class="iconbtn" aria-label="Opciones"><svg class="ic"><use href="#i-dots"/></svg></button>
+        </header>
+        <div class="bia-thread" id="biaThread"></div>
+        <div class="bia-quick" id="biaQuick"></div>
+        <div class="bia-input">
+          <span class="bia-input-box">
+            <input id="biaInput" placeholder="Pregúntale a BIA…" />
+            <button class="bia-send" aria-label="Enviar"><svg class="ic"><use href="#i-arrow-r"/></svg></button>
+          </span>
+        </div>
+      </div>
+
+      <!-- BIA FAB (visible en todas las vistas) -->
+      <button class="bia-fab" id="biaFab" aria-label="Abrir BIA">
+        <span class="bia-fab-pulse"></span>
+        <span class="bia-fab-mark">B</span>
+        <span class="bia-fab-dot"></span>
+      </button>
 
       <!-- iPhone home indicator (solo en el frame de escritorio) -->
       <div class="home-indicator" aria-hidden="true"></div>

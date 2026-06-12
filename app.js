@@ -124,9 +124,79 @@ const NOTIFS = [
 /* ---------------- MÁS ---------------- */
 const MORE = [
   [ {ic:'i-user',t:'Datos personales'}, {ic:'i-shield',t:'Bancos conectados y consentimientos', go:'consents'}, {ic:'i-card',t:'Tarjetas y cuentas'} ],
-  [ {ic:'i-bell',t:'Notificaciones y alertas'}, {ic:'i-coins',t:'Categorías y reglas'}, {ic:'i-spark',t:'Ahorro automático'} ],
+  [ {ic:'i-bell',t:'Notificaciones y alertas'}, {ic:'i-coins',t:'Categorías y reglas'}, {ic:'i-spark',t:'Ahorro automático'}, {ic:'i-receipt',t:'Suscripciones detectadas', go:'subs'} ],
   [ {ic:'i-help',t:'Centro de ayuda'}, {ic:'i-gear',t:'Configuración'} ],
 ];
+
+/* ---------------- SUSCRIPCIONES (detectadas automáticamente) ---------------- */
+const SUBS = [
+  { name:'Netflix',         tag:'NF', color:'#E50914', amt:44.90, freq:'Mensual', next:'8 jul', last:'Anoche',           card:'Visa 0192', use:'high',  cat:'fun' },
+  { name:'Spotify Premium', tag:'SP', color:'#1DB954', amt:16.90, freq:'Mensual', next:'14 jul', last:'Hoy',              card:'Visa 0192', use:'high',  cat:'fun' },
+  { name:'Disney+',         tag:'D+', color:'#0E2D6B', amt:28.90, freq:'Mensual', next:'22 jun', last:'Hace 6 días',     card:'Visa 0192', use:'mid',   cat:'fun' },
+  { name:'Smart Fit',       tag:'SF', color:'#FFE600', amt:99.00, freq:'Mensual', next:'1 jul',  last:'Hace 47 días',    card:'Sueldo 4821', use:'unused', cat:'salud' },
+  { name:'Crunchyroll',     tag:'CR', color:'#F47521', amt:24.90, freq:'Mensual', next:'19 jun', last:'Hace 81 días',    card:'Visa 0192', use:'unused', cat:'fun' },
+  { name:'Apple iCloud+',   tag:'iC', color:'#A1A1A6', amt:3.99,  freq:'Mensual', next:'12 jun', last:'Hoy',              card:'Visa 0192', use:'high',  cat:'serv' },
+  { name:'ChatGPT Plus',    tag:'AI', color:'#10A37F', amt:78.00, freq:'Mensual', next:'24 jun', last:'Hace 19 días',    card:'Visa 0192', use:'low',   cat:'serv' },
+  { name:'Movistar Plan',   tag:'Mo', color:'#0066CC', amt:89.90, freq:'Mensual', next:'7 jul',  last:'Servicio',        card:'Sueldo 4821', use:'fixed', cat:'serv' },
+];
+
+/* ---------------- BIA · BanBif Inteligente (asistente AI) ---------------- */
+const BIA_GREETING = {
+  text:'Hola Nelson 👋 Soy <b>BIA</b>, tu asistente financiero. Esta semana detecté algo interesante:',
+  card:{ kind:'insight',
+    title:'Pagas S/ 295/mes en suscripciones',
+    body:'3 de ellas no las usas hace más de 45 días — podrías ahorrar <b>S/ 124/mes</b>.',
+    cta:'Ver suscripciones', go:'subs' }
+};
+const BIA_QUICK = [
+  { id:'q-subs', text:'Mis suscripciones' },
+  { id:'q-end',  text:'¿Cómo cierro junio?' },
+  { id:'q-invest', text:'¿Puedo invertir algo?' },
+  { id:'q-rest', text:'Mis gastos en restaurantes' },
+  { id:'q-vue',  text:'¿Cuánto llevo de Ahorro Vueltos?' },
+  { id:'q-tip',  text:'Dame un consejo rápido' },
+];
+const BIA_REPLIES = {
+  'q-subs':{
+    text:'Te muestro las 8 suscripciones que detecté en tus últimos movimientos:',
+    card:{ kind:'insight',
+      title:'S/ 386.49/mes · S/ 4,637/año',
+      body:'<b>3 sin uso reciente</b> · Smart Fit, Crunchyroll y Disney+ sumarían <b>S/ 152.80/mes</b> si las cancelas.',
+      cta:'Abrir suscripciones', go:'subs' }
+  },
+  'q-end':{
+    text:'Con tus ingresos y gastos recurrentes:',
+    card:{ kind:'forecast',
+      title:'Cerrarás junio con +S/ 3,000',
+      body:'Tu saldo no bajará de <b>S/ 9,800</b> · proyección con 89% de confianza.',
+      cta:'Ver flujo proyectado', go:'analyze' }
+  },
+  'q-invest':{
+    text:'Sí — detecté <b>S/ 9,800</b> sin movimiento en tu Cuenta Ahorro hace 90+ días:',
+    card:{ kind:'reco',
+      title:'Depósito a Plazo · 5.2% TREA',
+      body:'En 12 meses ganarías ≈ <b>S/ 510</b> sin asumir riesgo. Cubre el FSD hasta S/ 145,300.',
+      cta:'Simular en 30 seg', go:'goals' }
+  },
+  'q-rest':{
+    text:'Gastaste <b>S/ 980</b> en Restaurantes este mes — 23% más que en mayo:',
+    card:{ kind:'insight',
+      title:'Top 3: Rappi, Starbucks, Tanta',
+      body:'Si lo bajas a S/ 800 (promedio histórico), liberarías <b>S/ 180/mes</b> para tu meta de Cusco.',
+      cta:'Ver detalle', go:'analyze' }
+  },
+  'q-vue':{
+    text:'Este mes redondeaste <b>S/ 86.40</b> sin darte cuenta ✨ Va directo a tu Fondo de Emergencia.',
+    card:null
+  },
+  'q-tip':{
+    text:'Tu salud financiera mejoró 6 puntos este mes. El factor que más subiría tu score: bajar Restaurantes 15%.',
+    card:{ kind:'tip',
+      title:'Sube tu score de 78 → 85',
+      body:'Activando alerta de presupuesto Restaurantes al 70% (hoy salta al 82%).',
+      cta:'Activar alerta', go:'budgets' }
+  },
+};
 
 /* ---------------- SERIES (6 meses) ---------------- */
 const IE = [ // ingresos / gastos
@@ -369,6 +439,101 @@ function renderMore(){
     <button class="more-it"${it.go?` data-go="${it.go}"`:''}><div class="more-ico">${icon(it.ic)}</div><b>${it.t}</b><svg class="ic chev"><use href="#i-chev"/></svg></button>`).join('')}</div>`).join('');
 }
 
+/* ---------- Suscripciones ---------- */
+function renderSubs(){
+  const sorted=[...SUBS].sort((a,b)=>b.amt-a.amt);
+  $('#subsList').innerHTML=sorted.map(s=>{
+    const pill = s.use==='unused' ? '<span class="sub-pill unused">Sin uso · 45+ días</span>'
+             : s.use==='low'    ? '<span class="sub-pill low">Uso bajo</span>'
+             : s.use==='fixed'  ? '<span class="sub-pill fixed">Servicio</span>' : '';
+    return `<div class="sub">
+      <div class="sub-ico" style="background:${s.color}">${s.tag}</div>
+      <div class="sub-body">
+        <div class="sub-name">${s.name} ${pill}</div>
+        <div class="sub-meta"><span>${s.freq}</span><span>· Próx. ${s.next}</span><span>· ${s.last}</span></div>
+      </div>
+      <div class="sub-amt">${money(s.amt)}<small>${s.card}</small></div>
+    </div>`;
+  }).join('');
+}
+
+/* ============================================================
+   BIA · ASISTENTE CONVERSACIONAL
+   ============================================================ */
+const BIA_STATE = { opened:false, busy:false };
+const nowTime = ()=>{ const h=9,m=41; return `${h}:${String(m).padStart(2,'0')}`; };
+
+function biaCardHTML(card){
+  if(!card) return '';
+  const kindLbl = { insight:'Insight', forecast:'Predicción', reco:'Recomendado para ti', tip:'Consejo' }[card.kind]||'BIA';
+  const kindIco = { insight:'i-spark', forecast:'i-up', reco:'i-coins', tip:'i-flame' }[card.kind]||'i-spark';
+  const cta = card.cta ? `<button class="bia-card-cta" data-bia-cta data-go="${card.go||''}">${card.cta} ${icon('i-arrow-r')}</button>` : '';
+  return `<div class="bia-card">
+    <span class="bia-card-kind">${icon(kindIco)} ${kindLbl}</span>
+    <div class="bia-card-title">${card.title}</div>
+    <div class="bia-card-body">${card.body}</div>
+    ${cta}
+  </div>`;
+}
+
+function biaPushUser(text){
+  const t=nowTime();
+  $('#biaThread').insertAdjacentHTML('beforeend',
+    `<div class="bia-msg user"><div class="bia-bubble">${text}</div><div class="bia-time">${t}</div></div>`);
+  biaScroll();
+}
+
+function biaPushBot(payload){
+  const t=nowTime();
+  const html = `<div class="bia-msg bot">
+      <div class="bia-bubble">${payload.text}</div>
+      ${biaCardHTML(payload.card)}
+      <div class="bia-time">BIA · ${t}</div>
+    </div>`;
+  $('#biaThread').insertAdjacentHTML('beforeend', html);
+  biaScroll();
+}
+
+function biaTyping(on){
+  const cur = $('#biaTyping');
+  if(on){
+    if(!cur) $('#biaThread').insertAdjacentHTML('beforeend',
+      `<div class="bia-msg bot" id="biaTyping"><div class="bia-typing"><span></span><span></span><span></span></div></div>`);
+    biaScroll();
+  } else if(cur){ cur.remove(); }
+}
+
+function biaScroll(){ const th=$('#biaThread'); th.scrollTop=th.scrollHeight; }
+
+function biaAsk(qId){
+  if(BIA_STATE.busy) return;
+  const q = BIA_QUICK.find(x=>x.id===qId);
+  if(!q) return;
+  biaPushUser(q.text);
+  BIA_STATE.busy=true;
+  biaTyping(true);
+  setTimeout(()=>{
+    biaTyping(false);
+    biaPushBot(BIA_REPLIES[qId]);
+    BIA_STATE.busy=false;
+  }, 850);
+}
+
+function renderBiaQuick(){
+  $('#biaQuick').innerHTML = BIA_QUICK.map(q=>
+    `<button class="bia-quick-it" data-bia-q="${q.id}">${q.text}</button>`).join('');
+}
+
+function openBia(){
+  if(!BIA_STATE.opened){
+    $('#biaThread').innerHTML='';
+    biaPushBot(BIA_GREETING);
+    BIA_STATE.opened=true;
+  }
+  $('#biaSheet').classList.add('show');
+}
+function closeBia(){ $('#biaSheet').classList.remove('show'); }
+
 /* ----- txn detail sheet ----- */
 function openTxn(idx){
   const t=TXNS[idx], ct=CATS[t.cat], pos=t.amt>0;
@@ -415,7 +580,7 @@ function paintView(id){
 function go(id, push=true){
   $$('.view').forEach(v=>v.classList.toggle('is-active', v.dataset.view===id));
   // tab highlight (sub-views map to their parent tab)
-  const tabFor = TABS.includes(id)?id:(id==='budgets'||id==='health'?'analyze':(id==='consents'?'more':'home'));
+  const tabFor = TABS.includes(id)?id:(id==='budgets'||id==='health'?'analyze':(id==='consents'||id==='subs'?'more':'home'));
   $$('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tabFor));
   // scroll top
   const v=$(`.view[data-view="${id}"]`); if(v) v.scrollTop=0;
@@ -435,6 +600,12 @@ function hideSheets(){ $('#scrim').classList.remove('show'); $$('.sheet').forEac
    EVENTOS
    ============================================================ */
 document.addEventListener('click', e=>{
+  // BIA: prioridad — un data-bia-cta lleva data-go, así que primero atendemos quick + CTA
+  const biaQ = e.target.closest('[data-bia-q]'); if(biaQ){ biaAsk(biaQ.dataset.biaQ); return; }
+  const biaCta = e.target.closest('[data-bia-cta]'); if(biaCta){ closeBia(); if(biaCta.dataset.go) go(biaCta.dataset.go); return; }
+  if(e.target.closest('#biaFab') || e.target.closest('#biaCta')){ openBia(); return; }
+  if(e.target.closest('#biaClose')){ closeBia(); return; }
+
   const go_=e.target.closest('[data-go]'); if(go_){ go(go_.dataset.go); return; }
   const nav=e.target.closest('[data-nav]'); if(nav){ go(nav.dataset.nav); return; }
   const tab=e.target.closest('.tab'); if(tab){ go(tab.dataset.tab); return; }
@@ -469,6 +640,7 @@ function init(){
   renderChips(); renderTxns();
   renderBudgets(); renderGoals(); renderGoalsMini(); renderRecos();
   renderHealth(); renderNotifs(); renderMore(); renderConsents();
+  renderSubs(); renderBiaQuick();
   $$('.ring').forEach(setRing);
   go('splash', false);
 }
